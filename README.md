@@ -37,7 +37,6 @@ significantly reducing simulation time.
 
 ![Architectural Checkpoint State](images/checkpoint_state_architecture.png)
 
-## Architectural Checkpoint State
 
 To accelerate RTL simulations, the processor state can be checkpointed after the system completes its early boot phase.
 
@@ -52,6 +51,27 @@ Detailed analysis is available here:
 
 docs/checkpoint_state.md
 
+## Boot State Experiment
+
+An experiment was conducted to capture architectural processor state
+during the early boot phase using QEMU and GDB.
+
+The goal was to observe how processor registers and control state
+change during system initialization and identify the minimal state
+required for checkpoint-based simulation.
+
+Example architectural state observed during boot:
+
+pc       = 0x8000b64a  
+satp     = 0x0  
+mstatus  = 0xa00000000  
+medeleg  = 0x0  
+mideleg  = 0x1444  
+
+More details are available here:
+
+docs/boot_state_experiment.md
+
 ## Environment
 
 The experiments were performed using the following tools:
@@ -60,6 +80,8 @@ The experiments were performed using the following tools:
 * OpenSBI firmware
 * Linux kernel (RISC-V)
 * gdb-multiarch for debugging
+
+
 
 
 ### Folder Description
@@ -76,7 +98,8 @@ The experiments were performed using the following tools:
 riscv-boot-analysis/
 |
 ├── docs/
-│ ├── boot_sequence.md
+| ├── boot_sequence.md
+│ ├── boot_state_experiment.md
 │ ├── checkpoint_state.md
 │ ├── csr_analysis.md
 │ ├── gdb_debugging.md
@@ -95,5 +118,12 @@ riscv-boot-analysis/
 ├── LICENSE
 └── README.md
 ```
+## Future Work
 
+Possible extensions of this work include:
+
+- Automating architectural state extraction using GDB scripts
+- Identifying the minimal checkpoint state required for OpenPiton RTL simulation
+- Experimenting with restoring processor state during simulation
+- Integrating checkpointing mechanisms into the OpenPiton simulation flow
 
