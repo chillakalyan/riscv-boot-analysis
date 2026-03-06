@@ -1,56 +1,70 @@
+
+
+
 # RISC-V Boot Analysis Toolkit
 
-This repository documents experiments exploring the boot sequence
-of a RISC-V Linux system running in QEMU with OpenSBI firmware.
+This repository explores the early boot process of a **RISC-V Linux system** running in **QEMU** with **OpenSBI firmware**.
+The goal is to analyze architectural state transitions during boot and investigate the minimal processor state required for **checkpoint-based RTL simulation**, particularly for platforms such as **OpenPiton**.
 
-The goal is to understand architectural state transitions during
-early boot and analyze the minimal processor state required for
-checkpointing in RTL simulations such as OpenPiton.
+## Overview
 
-Topics explored:
+Modern RTL simulators can take a long time to boot a full operating system.
+Checkpointing allows the simulator to restore execution from a saved architectural state instead of repeating the entire boot process.
 
-• RISC-V privilege modes  
-• OpenSBI firmware initialization  
-• CSR state transitions  
-• QEMU debugging using GDB  
-• Architectural state inspection
+This project documents experiments and observations related to:
+
+* RISC-V privilege mode transitions
+* OpenSBI firmware initialization
+* Control and Status Register (CSR) state during boot
+* QEMU debugging using GDB
+* Architectural state inspection for checkpointing
 
 ## RISC-V Boot Flow
 
-The following diagram illustrates the early boot sequence of a
-RISC-V system running in QEMU with OpenSBI firmware.
+The following diagram illustrates the high-level boot sequence of a RISC-V system running in QEMU with OpenSBI.
 
 ![RISC-V Boot Flow](images/riscv_boot_flow.png)
 
 ## Architectural Checkpoint State
 
-For faster RTL simulation in platforms such as OpenPiton,
-the system state can be checkpointed after the boot phase.
+The following diagram illustrates the concept of capturing the minimal
+architectural state of a RISC-V processor so that execution can be resumed
+without repeating the entire boot process.
 
-This repository explores the minimal architectural state
-required to restore processor execution.
+In long RTL simulations (e.g., OpenPiton), checkpointing allows the system
+to restore processor state and continue execution from a saved point,
+significantly reducing simulation time.
 
-See detailed analysis here:
+![Architectural Checkpoint State](images/checkpoint_state_architecture.png)
+
+## Architectural Checkpoint State
+
+To accelerate RTL simulations, the processor state can be checkpointed after the system completes its early boot phase.
+
+This repository investigates the **minimal architectural state required to resume execution**, including:
+
+* Program counter (PC)
+* General-purpose registers
+* Control and Status Registers (CSR)
+* Privilege mode state
+
+Detailed analysis is available here:
 
 docs/checkpoint_state.md
 
-Environment:
+## Environment
 
-QEMU
-OpenSBI
-Linux Kernel (RISC-V)
-gdb-multiarch
+The experiments were performed using the following tools:
 
-Repository Structure:
+* QEMU (RISC-V virt machine)
+* OpenSBI firmware
+* Linux kernel (RISC-V)
+* gdb-multiarch for debugging
 
-docs/
-Documentation and analysis
+## Repository Structure
 
-logs/
-Captured boot logs
+docs/ – Documentation and architectural analysis
+logs/ – Captured boot logs and experiment outputs
+scripts/ – Helper scripts for debugging and state extraction
+images/ – Architecture and boot flow diagrams
 
-scripts/
-Automation scripts for debugging
-
-images/
-Architecture diagrams
