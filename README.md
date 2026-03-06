@@ -15,6 +15,13 @@ Topics explored:
 • QEMU debugging using GDB  
 • Architectural state inspection
 
+## RISC-V Boot Flow
+
+The following diagram illustrates the early boot sequence of a
+RISC-V system running in QEMU with OpenSBI firmware.
+
+![RISC-V Boot Flow](images/riscv_boot_flow.png)
+
 Environment:
 
 QEMU
