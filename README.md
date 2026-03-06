@@ -61,10 +61,37 @@ The experiments were performed using the following tools:
 * Linux kernel (RISC-V)
 * gdb-multiarch for debugging
 
+
+### Folder Description
+
+- **docs/** – Detailed documentation explaining the RISC-V boot process, CSR analysis, debugging steps, and checkpoint architecture.
+- **images/** – Architecture diagrams used in the documentation.
+- **logs/** – Boot logs collected during QEMU experiments.
+- **scripts/** – Helper scripts used to extract architectural state using GDB.
+- **LICENSE** – MIT license for the project.
+- **README.md** – Project overview and documentation entry point.
+
 ## Repository Structure
 
-docs/ – Documentation and architectural analysis
-logs/ – Captured boot logs and experiment outputs
-scripts/ – Helper scripts for debugging and state extraction
-images/ – Architecture and boot flow diagrams
+├── docs/
+│ ├── boot_sequence.md
+│ ├── checkpoint_state.md
+│ ├── csr_analysis.md
+│ ├── gdb_debugging.md
+│ └── qemu_setup.md
+│
+├── images/
+│ ├── checkpoint_state_architecture.png
+│ └── riscv_boot_flow.png
+│
+├── logs/
+│ └── linux_boot.txt
+│
+├── scripts/
+│ └── dump_registers.py
+│
+├── LICENSE
+└── README.md
+
+
 
