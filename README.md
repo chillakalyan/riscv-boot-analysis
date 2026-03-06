@@ -22,6 +22,18 @@ RISC-V system running in QEMU with OpenSBI firmware.
 
 ![RISC-V Boot Flow](images/riscv_boot_flow.png)
 
+## Architectural Checkpoint State
+
+For faster RTL simulation in platforms such as OpenPiton,
+the system state can be checkpointed after the boot phase.
+
+This repository explores the minimal architectural state
+required to restore processor execution.
+
+See detailed analysis here:
+
+docs/checkpoint_state.md
+
 Environment:
 
 QEMU
