@@ -81,7 +81,17 @@ The experiments were performed using the following tools:
 * Linux kernel (RISC-V)
 * gdb-multiarch for debugging
 
+## Key Findings
 
+From the experiments and architectural inspection performed using QEMU and GDB, the following observations were made:
+
+- During early boot, the processor executes in **Machine Mode (M-mode)** under the control of OpenSBI firmware.
+- The **satp register remains 0**, indicating that virtual memory is not enabled at the early boot stage.
+- The **mstatus register configures machine-level execution state** before the transition to supervisor mode.
+- **Trap delegation registers (medeleg and mideleg)** determine which exceptions and interrupts are forwarded to supervisor mode.
+- After OpenSBI initialization, control is transferred to the **Linux kernel in Supervisor Mode (S-mode)**.
+
+These observations help identify the **minimal architectural processor state required for checkpoint-based simulation**, which can significantly reduce boot overhead in RTL simulation platforms such as OpenPiton.
 
 
 ### Folder Description
@@ -126,4 +136,18 @@ Possible extensions of this work include:
 - Identifying the minimal checkpoint state required for OpenPiton RTL simulation
 - Experimenting with restoring processor state during simulation
 - Integrating checkpointing mechanisms into the OpenPiton simulation flow
+
+## References
+
+- RISC-V Privileged Architecture Specification  
+  https://riscv.org/technical/specifications/
+
+- OpenSBI Firmware  
+  https://github.com/riscv-software-src/opensbi
+
+- QEMU RISC-V Documentation  
+  https://www.qemu.org/docs/master/system/target-riscv.html
+
+- OpenPiton Project  
+  https://github.com/PrincetonUniversity/openpiton
 
