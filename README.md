@@ -72,7 +72,9 @@ The experiments were performed using the following tools:
 - **README.md** – Project overview and documentation entry point.
 
 ## Repository Structure
-
+```
+riscv-boot-analysis/
+|
 ├── docs/
 │ ├── boot_sequence.md
 │ ├── checkpoint_state.md
@@ -92,6 +94,6 @@ The experiments were performed using the following tools:
 │
 ├── LICENSE
 └── README.md
-
+```
 
 
