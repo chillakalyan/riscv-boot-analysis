@@ -7,11 +7,11 @@ modularity and extensibility.
 ## Privilege Levels
 
 RISC-V defines multiple privilege levels:
-
+```
 - Machine Mode (M) – highest privilege
 - Supervisor Mode (S) – operating system
 - User Mode (U) – user applications
-
+```
 Machine Mode is responsible for low-level system initialization.
 
 ## Control and Status Registers
@@ -20,12 +20,12 @@ CSRs control processor configuration, trap handling,
 and memory management.
 
 Important examples:
-
+```
 - mstatus
 - mtvec
 - mepc
 - satp
-
+```
 ## Firmware and Boot Process
 
 In many systems, OpenSBI acts as firmware that initializes the
