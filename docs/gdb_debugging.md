@@ -22,21 +22,21 @@ Explanation:
 - `-s` opens a GDB debugging port (default port 1234)
 
 ## Connecting GDB
-```
+
 Start GDB:
-
+```
 gdb-multiarch
-
+```
 Connect to the QEMU target:
-
+```
 target remote :1234
 ```
 ## Inspecting Registers
 
 Display all registers:
-
+```
 info registers
-
+```
 Inspect specific CSRs:
 ```
 p/x $mstatus  
@@ -53,4 +53,5 @@ during the boot sequence.
 
 These observations are useful for identifying the minimal architectural
 state required for checkpoint-based simulation.
+
 
