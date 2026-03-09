@@ -36,10 +36,14 @@ qemu-system-riscv64 \
  -kernel Image \
  -S -s
 ```
-Then connect with:
+Then connecting with GDB:
+
+Start GDB:
 ```
 gdb-multiarch
-
+```
+Connect to the QEMU target:
+```
 target remote :1234
 ```
 ## Purpose
