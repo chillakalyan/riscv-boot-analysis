@@ -1,20 +1,20 @@
 # Minimal Checkpoint State
-```
+
 In order to restart execution in an RTL simulation environment without
 repeating the entire boot sequence, a minimal architectural checkpoint
 state must be captured.
 
 The checkpoint should contain the minimum processor state necessary
 to restore deterministic execution.
-```
+
 ## Core Processor State
 
 ### Program Counter
-```
+
 The Program Counter (PC) contains the address of the next instruction
 to be executed. Restoring the correct PC value is essential for
 continuing execution from the checkpoint.
-```
+
 ### General Purpose Registers
 
 RISC-V provides 32 general-purpose registers:
@@ -51,10 +51,10 @@ In most cases, the Linux kernel runs in Supervisor Mode after OpenSBI
 initialization.
 
 ## Memory Context
-```
+
 If virtual memory is enabled, the page tables referenced by the `satp`
 register must also be restored.
-```
+
 ## Summary
 
 A minimal checkpoint state may include:
