@@ -22,9 +22,9 @@ Without restoring the correct PC, execution cannot resume properly.
 ### General Purpose Registers
 
 RISC-V processors include 32 general purpose registers:
-
+```
 x0 – x31
-
+```
 These registers store intermediate computational values and must be
 restored during checkpoint recovery.
 
@@ -33,24 +33,24 @@ restored during checkpoint recovery.
 Several CSRs control processor behavior and privilege configuration.
 
 Important examples include:
-
+```
 - mstatus
 - satp
 - mtvec
 - mepc
 - medeleg
 - mideleg
-
+```
 These registers define interrupt handling, privilege state, and memory
 translation.
 
 ### Privilege Mode
 
 The processor must restore the correct privilege level:
-
+```
 - Machine Mode (M-mode)
 - Supervisor Mode (S-mode)
-
+```
 Linux typically runs in Supervisor Mode.
 
 ### Memory Context
@@ -63,3 +63,4 @@ by the `satp` register must also be restored.
 The objective is to identify the **minimal processor state** required to
 restart execution in an RTL simulation environment without performing
 a full system boot.
+
