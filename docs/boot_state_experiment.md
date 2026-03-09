@@ -10,24 +10,24 @@ process and identify the minimal state required for checkpointing.
 ## Setup
 
 The system was executed using QEMU with the following configuration:
-
+```
 - QEMU RISC-V virt machine
 - OpenSBI firmware
 - Linux kernel (RISC-V)
 - gdb-multiarch for debugging
-
+```
 QEMU was launched in debug mode:
-
+```
 qemu-system-riscv64 \
  -machine virt \
  -nographic \
  -kernel Image \
  -S -s
-
+```
 GDB was then attached to the running system.
 
 ## Captured Architectural State
-
+```
 Example architectural state observed during early boot:
 
 pc       = 0x8000b64a  
@@ -35,9 +35,9 @@ satp     = 0x0
 mstatus  = 0xa00000000  
 medeleg  = 0x0  
 mideleg  = 0x1444  
-
+```
 ## Observations
-
+```
 satp = 0  
 Virtual memory is not yet enabled during early boot.
 
@@ -48,7 +48,7 @@ supervisor mode.
 medeleg / mideleg  
 Trap delegation registers define which exceptions and interrupts
 will be handled by supervisor mode.
-
+```
 ## Relevance to Checkpointing
 
 Capturing this architectural state allows the simulator to restore
