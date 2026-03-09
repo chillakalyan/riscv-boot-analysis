@@ -13,21 +13,21 @@ before transferring control to the Linux kernel.
 The **mstatus register** controls machine-level privilege behavior.
 
 It defines:
-
+```
 - interrupt enable bits
 - privilege transitions
 - execution mode configuration
-
+```
 ### satp
 
 The **satp register** controls address translation and virtual memory.
 
 Fields include:
-
+```
 - MODE – translation mode
 - ASID – address space identifier
 - PPN – page table base address
-
+```
 During early boot, `satp` is often zero because virtual memory has not
 yet been enabled.
 
@@ -60,3 +60,4 @@ Analyzing these CSRs helps determine:
 - processor execution context
 - privilege mode transitions
 - minimal state required for checkpoint recovery
+
