@@ -33,31 +33,32 @@ yet been enabled.
 
 ### mtvec
 
-The **mtvec register** stores the base address of the machine trap
+```The **mtvec register** stores the base address of the machine trap
 handler.
 
 This register determines where the processor jumps when an exception
 or interrupt occurs in Machine Mode.
-
+```
 ### mepc
-
+```
 The **mepc register** stores the program counter at the time of an
 exception in Machine Mode.
 
 It is used to resume execution after handling the exception.
-
+```
 ### medeleg / mideleg
-
+```
 These registers determine which exceptions and interrupts are delegated
 to Supervisor Mode.
 
 This allows the Linux kernel to manage traps directly.
-
+```
 ## Importance
 
 Analyzing these CSRs helps determine:
-
+```
 - processor execution context
 - privilege mode transitions
 - minimal state required for checkpoint recovery
+```
 
