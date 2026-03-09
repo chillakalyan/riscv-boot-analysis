@@ -106,24 +106,30 @@ These observations help identify the **minimal architectural processor state req
 ## Repository Structure
 ```
 riscv-boot-analysis/
-|
+│
 ├── docs/
-| ├── boot_sequence.md
-│ ├── boot_state_experiment.md
-│ ├── checkpoint_state.md
-│ ├── csr_analysis.md
-│ ├── gdb_debugging.md
-│ └── qemu_setup.md
+│   ├── architecture_overview.md
+│   ├── boot_sequence.md
+│   ├── boot_state_experiment.md
+│   ├── checkpoint_state.md
+│   ├── csr_analysis.md
+│   ├── gdb_debugging.md
+│   ├── gdb_state_capture.md
+│   ├── minimal_checkpoint_state.md
+│   ├── opensbi_linux_transition.md
+│   ├── qemu_setup.md
+│   └── references.md
 │
 ├── images/
-│ ├── checkpoint_state_architecture.png
-│ └── riscv_boot_flow.png
+│   ├── checkpoint_state_architecture.png
+│   └── riscv_boot_flow.png
 │
 ├── logs/
-│ └── linux_boot.txt
+│   └── linux_boot.txt
 │
 ├── scripts/
-│ └── dump_registers.py
+│   ├── capture_checkpoint_state.py
+│   └── dump_registers.py
 │
 ├── LICENSE
 └── README.md
