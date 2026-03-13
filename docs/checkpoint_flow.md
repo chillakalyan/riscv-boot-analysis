@@ -14,7 +14,7 @@ and continue execution immediately.
 The following diagram illustrates the conceptual flow of checkpoint-based
 simulation.
 
-![Checkpoint Flow](.)
+![Checkpoint Flow](https://github.com/chillakalyan/riscv-boot-analysis/blob/main/images/checkpoint_flow.png)
 
 ## Step-by-Step Explanation
 
