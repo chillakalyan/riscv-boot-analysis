@@ -1,87 +1,84 @@
+
+
+
 # RISC-V Boot Analysis Toolkit
 
-This repository explores the early boot process of a **RISC-V Linux system** running in **QEMU** with **OpenSBI firmware**.
+This repository explores the early boot process of a **RISC-V Linux system** running in **QEMU with OpenSBI firmware**.
 
-The goal of this project is to analyze architectural state transitions during boot and investigate the **minimal processor state required for checkpoint-based RTL simulation**, particularly for platforms such as **OpenPiton**.
+The goal is to analyze architectural state transitions during boot and investigate the **minimal processor state required for checkpoint-based RTL simulation**, particularly for platforms such as **OpenPiton**.
 
-Checkpointing allows a simulator to restore execution from a saved architectural state instead of repeating the entire operating system boot process, significantly reducing simulation time.
+Checkpointing enables a simulator to restore execution from a saved architectural state instead of repeating the full OS boot process, significantly reducing simulation time.
 
 ---
 
 # Overview
 
-Modern RTL simulators require a large number of cycles to boot a full operating system such as Linux.
+Booting a full Linux system in RTL simulation is extremely time-consuming.
 
-Instead of simulating the entire boot sequence repeatedly, checkpointing enables:
+Checkpointing provides a solution by:
 
-- capturing processor architectural state at a stable execution point
-- saving this state to a checkpoint file
-- restarting simulation from the saved state
+- capturing architectural processor state at a stable execution point  
+- saving this state as a checkpoint  
+- restoring execution directly from the checkpoint  
 
-This project investigates how such checkpointing can be applied to **RISC-V systems running Linux under QEMU**.
+This project investigates how checkpointing can be applied to **RISC-V systems running Linux in QEMU**.
 
 ---
 
 # Topics Explored
 
-This repository documents experiments and observations related to:
+This repository covers:
 
-- RISC-V privilege mode transitions
-- OpenSBI firmware initialization
-- Control and Status Register (CSR) behavior during boot
-- QEMU debugging using GDB
-- architectural state inspection for checkpointing
-- analysis of checkpointing mechanisms in virtualization and OS hibernation
+- RISC-V privilege mode transitions  
+- OpenSBI firmware initialization  
+- Control and Status Register (CSR) behavior during boot  
+- QEMU debugging using GDB  
+- architectural state inspection for checkpointing  
+- checkpointing concepts in virtualization and OS hibernation  
 
 ---
 
 # RISC-V Boot Flow
 
-The following diagram illustrates the high-level boot sequence of a RISC-V system running in QEMU with OpenSBI.
+The following diagram illustrates the high-level boot sequence:
 
 ![RISC-V Boot Flow](images/riscv_boot_flow.png)
 
 Boot stages:
 
-1. CPU reset
-2. OpenSBI firmware initialization
-3. Machine mode configuration
-4. Trap delegation (medeleg / mideleg)
-5. Transition to supervisor mode
-6. Linux kernel entry
+1. CPU reset  
+2. OpenSBI initialization  
+3. Machine mode configuration  
+4. Trap delegation (medeleg / mideleg)  
+5. Transition to supervisor mode  
+6. Linux kernel entry  
 
 ---
 
 # Architectural Checkpoint Concept
 
-The following diagram illustrates the concept of capturing the minimal architectural state of a RISC-V processor so that execution can resume without repeating the entire boot process.
+Checkpointing captures the minimal architectural state required to resume execution.
 
 ![Architectural Checkpoint State](images/checkpoint_state_architecture.png)
 
-Checkpointing enables the simulator to restore processor state and continue execution from a previously saved point.
+Typical checkpoint components:
 
-The minimal checkpoint state typically includes:
+- Program Counter (PC)  
+- General-purpose registers  
+- Control and Status Registers (CSR)  
+- Privilege mode  
+- Relevant memory state  
 
-- Program Counter (PC)
-- General-purpose registers
-- Control and Status Registers (CSR)
-- Privilege mode state
-- relevant memory state
-
-More details:
-```
-docs/checkpoint_state.md
-```
+Detailed analysis:  
+`docs/checkpoint_state.md`
 
 ---
 
 # Boot State Experiment
 
-An experiment was conducted to observe architectural processor state during early boot using **QEMU and GDB**.
+Architectural state was captured during early boot using **QEMU + GDB**.
 
-The objective was to inspect register values and system state transitions during initialization.
-
-Example architectural state observed during boot:
+Example observed state:
 ```
 pc = 0x8000b64a
 satp = 0x0
@@ -90,50 +87,74 @@ medeleg = 0x0
 mideleg = 0x1444
 ```
 
-These observations help identify the minimal architectural state required for checkpoint-based simulation.
+These observations help identify the minimal checkpoint state.
 
-Detailed experiment documentation:
-```
-docs/boot_state_experiment.md
-```
+Details:  
+`docs/boot_state_experiment.md`
 
 ---
 
 # Key Findings
 
-From the experiments and architectural inspection performed using QEMU and GDB, the following observations were made:
+- Execution starts in **Machine Mode (M-mode)** under OpenSBI  
+- `satp = 0` → virtual memory disabled during early boot  
+- `mstatus` controls privilege transitions  
+- `medeleg / mideleg` define trap delegation to S-mode  
+- Control transfers to Linux in **Supervisor Mode (S-mode)**  
 
-- The processor begins execution in **Machine Mode (M-mode)** under OpenSBI firmware.
-- The **satp register remains 0 during early boot**, indicating that virtual memory has not yet been enabled.
-- The **mstatus register configures machine-level execution state** prior to privilege transitions.
-- **medeleg and mideleg registers** define which exceptions and interrupts are delegated to supervisor mode.
-- After OpenSBI initialization, execution transitions to the **Linux kernel running in Supervisor Mode (S-mode)**.
+These findings guide identification of the **minimal checkpoint state**.
 
-Understanding these transitions helps determine the **minimal processor state required to restart execution in RTL simulations**.
+---
+
+# Proposed Checkpoint Design ⭐
+
+This repository also proposes a **minimal checkpointing approach**:
+
+- capture architectural state at a stable Linux execution point  
+- store processor + memory state  
+- restore state to resume execution in RTL simulation  
+
+See:  
+`docs/proposed_checkpoint_design.md`
+
+---
+
+# Evaluation Plan
+
+To validate checkpointing:
+
+- verify correct execution after restore  
+- compare full boot vs checkpoint restart time  
+- validate CSR and register consistency  
+
+See:  
+`docs/evaluation_plan.md`
+
+---
+
+# Limitations
+
+Current limitations include:
+
+- incomplete memory state modeling  
+- device state not fully considered  
+- checkpoint restore not yet implemented  
+
+See:  
+`docs/limitations.md`
 
 ---
 
 # Environment
 
-The experiments were performed using the following tools:
-
-- QEMU (RISC-V virt machine)
-- OpenSBI firmware
-- Linux Kernel (RISC-V)
-- gdb-multiarch
+- QEMU (RISC-V virt machine)  
+- OpenSBI firmware  
+- Linux Kernel (RISC-V)  
+- gdb-multiarch  
 
 ---
 
-### Folder Description
-
-- **docs/** – Detailed documentation explaining the RISC-V boot process, CSR analysis, debugging steps, and checkpoint architecture.
-- **images/** – Architecture diagrams used in the documentation.
-- **logs/** – Boot logs collected during QEMU experiments.
-- **scripts/** – Helper scripts used to extract architectural state using GDB.
-- **LICENSE** – MIT license for the project.
-- **README.md** – Project overview and documentation entry point.
-
-## Repository Structure
+# Repository Structure
 ```
 riscv-boot-analysis/
 │
@@ -145,12 +166,15 @@ riscv-boot-analysis/
 │   ├── checkpoint_flow.md
 │   ├── checkpoint_state.md
 │   ├── csr_analysis.md
+│   ├── evaluation_plan.md
 │   ├── gdb_debugging.md
 │   ├── gdb_state_capture.md
+│   ├── limitations.md
 │   ├── linux_hibernation_analysis.md
 │   ├── minimal_checkpoint_state.md
 │   ├── opensbi_linux_transition.md
 │   ├── paper_notes.md
+│   ├── proposed_checkpoint_design.md
 │   ├── qemu_checkpointing.md
 │   ├── qemu_setup.md
 │   ├── references.md
@@ -173,18 +197,15 @@ riscv-boot-analysis/
 └── README.md
 ```
 
-
 ---
 
 # Future Work
 
-Possible extensions of this work include:
-
-- automating architectural state extraction using GDB scripts
-- identifying the minimal checkpoint state required for OpenPiton RTL simulation
-- implementing checkpoint restore mechanisms
-- exploring integration of checkpointing into the OpenPiton simulation workflow
-- investigating relationships between VM snapshots, Linux hibernation, and architectural checkpointing
+- automate architectural state extraction  
+- refine minimal checkpoint state  
+- implement checkpoint restore  
+- integrate with OpenPiton simulation flow  
+- compare with VM snapshots and Linux hibernation  
 
 ---
 
@@ -196,9 +217,8 @@ https://riscv.org/technical/specifications/
 OpenSBI Firmware  
 https://github.com/riscv-software-src/opensbi
 
-QEMU RISC-V Documentation  
+QEMU Documentation  
 https://www.qemu.org/docs/master/system/target-riscv.html
 
 OpenPiton Project  
 https://github.com/PrincetonUniversity/openpiton
-
