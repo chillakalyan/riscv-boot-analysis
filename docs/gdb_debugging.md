@@ -1,4 +1,4 @@
-# Debugging RISC-V Boot with GDB i
+# Debugging RISC-V Boot with GDB
 
 QEMU provides debugging support that allows inspection of the processor
 state using GDB.
