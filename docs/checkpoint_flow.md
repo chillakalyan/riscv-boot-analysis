@@ -1,4 +1,4 @@
-# Checkpoint Flow for RTL Simulatio
+# Checkpoint Flow for RTL Simulation
 
 Checkpointing allows a simulation environment to resume execution from a
 previously saved processor state instead of repeating the entire system
