@@ -1,4 +1,4 @@
-Current limitations
+Current limitations:
 ```
 • memory state not fully captured
 • device state not analyzed
