@@ -1,7 +1,7 @@
 
 
 
-# RISC-V Boot Analysis Toolkit
+# RISC-V Boot Analysis Toolki
 
 This repository explores the early boot process of a **RISC-V Linux system** running in **QEMU with OpenSBI firmware**.
 
