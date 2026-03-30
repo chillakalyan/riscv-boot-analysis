@@ -1,4 +1,4 @@
-# Research Notes: Checkpointing and Fast Simulation
+# Research Notes: Checkpointing and Fast Simulatio
 
 This document summarizes relevant research related to architectural
 checkpointing, system state restoration, and simulation acceleration.
