@@ -1,5 +1,5 @@
 
-# OpenSBI → Linux Boot Transition
+# OpenSBI → Linux Boot Transitio
 
 In a RISC-V system using OpenSBI firmware, the processor begins
 execution in Machine Mode (M-mode). OpenSBI performs platform
