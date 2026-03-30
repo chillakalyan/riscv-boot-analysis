@@ -1,6 +1,6 @@
 
 
-# Capturing Architectural State with GD
+# Capturing Architectural State with GDB
 
 To analyze the processor state during early boot, QEMU can be
 executed in debug mode and inspected using GDB.
