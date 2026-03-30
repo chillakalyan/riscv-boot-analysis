@@ -1,4 +1,4 @@
-# RISC-V Boot State Transition
+# RISC-V Boot State Transitio
 
 Understanding the processor state transitions during the boot process
 is important for identifying where checkpointing can occur.
