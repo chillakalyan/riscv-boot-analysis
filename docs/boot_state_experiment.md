@@ -1,4 +1,4 @@
-# Experiment: Capturing Architectural State During Boot
+# Experiment: Capturing Architectural State During Boo
 
 This experiment captures the architectural processor state during the
 early boot sequence of a RISC-V Linux system running in QEMU with
