@@ -1,4 +1,4 @@
-# QEMU Checkpointing and Snapshot Mechanism
+# QEMU Checkpointing and Snapshot Mechanisms
 
 QEMU provides several mechanisms for saving and restoring the state
 of a virtual machine. These mechanisms are closely related to the
