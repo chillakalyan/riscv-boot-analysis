@@ -1,4 +1,4 @@
-# Linux Hibernation (Suspend-to-Disk) Analysi
+# Linux Hibernation (Suspend-to-Disk) Analysis
 
 Linux provides a power management feature called **hibernation**
 (suspend-to-disk). When a system hibernates, the entire execution
