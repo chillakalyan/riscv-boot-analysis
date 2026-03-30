@@ -1,4 +1,4 @@
-Evaluation goals
+Evaluation goals:
 ```
 • verify correct execution after restore
 • compare boot time vs checkpoint restore time
