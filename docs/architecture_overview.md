@@ -1,5 +1,5 @@
 
-# RISC-V Architecture Overvie
+# RISC-V Architecture Overview
 
 RISC-V is an open instruction set architecture designed for
 modularity and extensibility.
