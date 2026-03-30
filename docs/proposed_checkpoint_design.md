@@ -1,4 +1,4 @@
-Goa
+Goal
 ```
 Design a minimal checkpoint mechanism for RISC-V RTL simulation
 ```
