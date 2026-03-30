@@ -1,4 +1,4 @@
-# RISC-V Boot Sequence
+# RISC-V Boot Sequenc
 
 This document describes the early boot process of a RISC-V Linux system
 running in QEMU using OpenSBI firmware.
