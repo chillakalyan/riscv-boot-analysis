@@ -1,4 +1,4 @@
-# Architectural Checkpoint Stat
+# Architectural Checkpoint State
 
 Checkpointing allows a simulator to restore execution from a saved
 processor state instead of repeating the entire boot process.
