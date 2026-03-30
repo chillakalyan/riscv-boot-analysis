@@ -1,4 +1,4 @@
-# Minimal Checkpoint Stat
+# Minimal Checkpoint State
 
 In order to restart execution in an RTL simulation environment without
 repeating the entire boot sequence, a minimal architectural checkpoint
