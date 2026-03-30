@@ -1,4 +1,4 @@
-# CSR Analysis During Boot
+# CSR Analysis During Boo
 
 Control and Status Registers (CSRs) play a critical role in the
 RISC-V privilege architecture.
