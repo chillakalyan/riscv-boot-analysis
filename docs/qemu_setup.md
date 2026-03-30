@@ -1,4 +1,4 @@
-# QEMU Setup for RISC-V Boot Analysis
+# QEMU Setup for RISC-V Boot Analysi
 
 This document describes how to run a RISC-V Linux system using QEMU and
 OpenSBI firmware.
