@@ -1,4 +1,4 @@
-# Related Wor
+# Related Work
 
 Checkpointing and state restoration have been widely studied in the
 context of computer architecture, virtualization, and system
